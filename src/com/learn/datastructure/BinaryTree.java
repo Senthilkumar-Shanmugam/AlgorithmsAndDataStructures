@@ -53,9 +53,10 @@ class BinaryTree {
 			
 			//node with two children. get inorder successor..smallest right subtree
 			
-		 root.setData(data);	
+		 root.setData(minValue(root.getRight()));	
 			
-			
+		// Delete the inorder successor
+         root.setRight(removeNode(root.getRight(), root.getData()));	
 		}
 				
 		
