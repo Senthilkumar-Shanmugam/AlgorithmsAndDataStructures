@@ -34,55 +34,42 @@ class BinaryTree {
 		}
 	}
 	
-	//return the parent node of the serach'd Node
-	public static Node searchParent(Node node, int key,Node parent) {
-		if (node == null)
-			return null;
-		else if (node.getData() == key)
-			return parent;
-		else if (key > node.getData())
-			return search(node.getRight(), key,node);
-		else if (key <= node.getData())
-			return search(node.getLeft(), key,node);
-		else
-			return null;
-	}
 	
-	public static void removeNode(Node root,int key){
+	
+	public static Node removeNode(Node root,int key){
 		System.out.println("Removing node from ..");
 		
-        Node parent = searchParent(root, key, root);
+        if(root==null)  return root;
         
-        if(parent == null)
-        	return;
-		System.out.println(" Parent node of key:"+parent.getData());  
-		
-		Node searchNode = null;
-        
-		if(parent.getLeft().getData() == key)
-			searchNode = parent.getLeft();
-		else
-			searchNode = parent.getRight();
-		
-		//leaf node
-		 Node left = searchNode.getLeft();
-		 Node right = searchNode.getRight();
-		 
-		 if(left == null && right == null) //remove the link to that node from its parent
-		 {
-			 parent.setLeft(null);
-			 parent.setRight(null);
-		 }else if(left != null && right != null){
-			 
-			 
-		 }else{
-			 
-		 }
-	
-		  
+        if(key < root.getData())
+        	root.setLeft(removeNode(root.getLeft(), key));
+		else if(key > root.getData())
+			root.setRight(removeNode(root.getRight(), key));
+		else{//Node to be deleted
+			if(root.getLeft()==null)
+				return root.getRight();
+			else if(root.getRight() == null)
+				return root.getLeft();
+			
+			//node with two children. get inorder successor..smallest right subtree
+			
+		 root.setData(data);	
+			
+			
+		}
 				
 		
 		
+	}
+	
+	private static int minValue(Node root){
+		int minv = root.getData();
+		
+		while(root.getLeft()!=null){
+			minv=root.getLeft().getData();
+			root=root.getLeft();
+		}
+		return minv;
 	}
 }
 
